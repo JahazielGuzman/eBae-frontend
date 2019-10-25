@@ -1,0 +1,181 @@
+/*---------- Search Bar */
+div.search-bar {
+    position: relative;
+    margin: 50px auto;
+    width: 95%;
+    max-width: 344px;
+    height: 48px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+button.search_button {
+    position: absolute;
+    height: 48px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+input#myinput {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 40px;
+    left: 172px;
+    margin: 4px 0;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+}
+/*---------- End Search Bar */
+
+/*---------- Login */
+
+div.login-div {
+    position: absolute;
+    margin: 50px auto;
+    width: 95%;
+    max-width: 344px;
+    height: 48px;
+    top: 0px;
+    right: 30px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+button.login-btn {
+    position: absolute;
+    right: 0px;
+    height: 48px;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+input#user-id {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 40px;
+    margin: 4px 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+}
+/*---------- End Login */
+
+/*---------- New Item/Sell your bullshit */
+
+div.new-item {
+    position: absolute;
+    margin: 50px auto;
+    /* width: 95%; */
+    max-width: 300px;
+    top: 0px;
+    left: 100px;
+    overflow: hidden;
+}
+
+div#new-item-specialBox-div {
+    display: none;
+    position: relative;
+    z-index: 3;
+    margin: 0px auto 0px auto;
+    width: 400px; 
+    height: 600px;
+    background: #FFF;
+    color: #000;
+}
+
+form#new-item-form {
+    padding: 20px;
+}
+/*---------- End new Item */
+
+/*---------- Index */
+
+div#wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: absolute;
+	top: 120px;
+	left: 0px;
+    padding-left:24px;
+}
+
+div.item-card {
+    width: 300px;
+    margin-bottom: 50px;
+}
+
+div.item-card h1 {
+    text-align: center;
+}
+
+/*---------- End Index */
+
+/*---------- Index Modal */
+
+div.overlay {
+    display: none;
+    z-index: 2;
+    background: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+div.specialBox {
+    display: none;
+    position: relative;
+    z-index: 3;
+    margin: 0px auto 0px auto;
+    width: 300px; 
+    height: 500px;
+    background: #FFF;
+    color: #000;
+}
+
+div#specialBox h1 {
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 0;
+}
+
+div#specialBox p {
+    margin-top: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+div#specialBox h2 {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+
+div#specialBox button {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+span.dolla {
+    color: green;
+}
+
+/*---------- End Index Modal */
