@@ -31,8 +31,9 @@ loginButton.addEventListener("click", function () {
 
 		let loggedInControls = `<span id='user-id' name='id' class='username'>
 		<strong>Username:</strong>${user.name}</span>
-		<button id="logout" class="button is-link login-btn">logout</button>`
+		<button id="logout" class="button is-link login-btn">logout</button>`;
 		loginDiv.innerHTML = loggedInControls;
+		loginDiv.className = "username-div";
 		userBox.dataset.name = user.name;
 		userBox.dataset.id = user.id;
 	 	Swal.fire({
