@@ -8,6 +8,7 @@ const search_button = document.querySelector("#search_button");
 const search_input = document.querySelector("#myinput");
 const userBox = document.querySelector('#user');
 const loginButton = document.querySelector('#login');
+const loginDiv = document.querySelector('#login-div')
 const loginInput = document.querySelector('#user-id');
 overlayDiv.className = 'overlay'
 specialBoxDiv.className = 'specialBox'
@@ -27,7 +28,11 @@ loginButton.addEventListener("click", function () {
 	fetch(`${BASE_URL}/login?id=${userId}`)
 	.then(res => res.json())
 	.then(user => {
-		console.log(user);
+
+		let loggedInControls = `<span id='user-id' name='id' class='username'>
+		<strong>Username:</strong>${user.name}</span>
+		<button id="logout" class="button is-link login-btn">logout</button>`
+		loginDiv.innerHTML = loggedInControls;
 		userBox.dataset.name = user.name;
 		userBox.dataset.id = user.id;
 	 	Swal.fire({
@@ -116,7 +121,8 @@ specialBoxDiv.addEventListener("click", (e) => {
 	}
 });
 
-
+// Go to the index route with search parameter corresponding to the item you searched for
+// then display each item that is returned from the search
 function searchItems(event) {
 
 	wrapper.innerHTML = "";
@@ -154,6 +160,7 @@ wrapper.addEventListener("click", (e) => {
 				<button class='button' style="background-color: orange;" id="buy-button" data-id="${itemCard.dataset.id}" >Buy</button>`
 	}
 })
+
 overlayDiv.addEventListener("click", () => {
 	overlayDiv.style.opacity = 0;
 	newItemForm.reset();

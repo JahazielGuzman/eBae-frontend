@@ -52,6 +52,23 @@ div.login-div {
     overflow: hidden;
 }
 
+div.username-div {
+    position: absolute;
+    margin: 50px auto;
+    width: 95%;
+    max-width: 344px;
+    height: 48px;
+    top: 0px;
+    right: 30px;
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+div.username-div span {
+    font-size: 2em;
+}
+
 button.login-btn {
     position: absolute;
     right: 0px;
