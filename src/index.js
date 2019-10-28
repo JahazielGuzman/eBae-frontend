@@ -1,5 +1,5 @@
 const BASE_URL = "https://e-bae.herokuapp.com/";
-const ITEMS_URL = "https://e-bae.herokuapp.com/";
+const ITEMS_URL = "https://e-bae.herokuapp.com/items";
 const overlayDiv = document.getElementById('overlay')
 const specialBoxDiv = document.getElementById('specialBox')
 const body = document.getElementById('body')
