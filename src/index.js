@@ -30,8 +30,7 @@ loginButton.addEventListener("click", function () {
 	.then(user => {
 
 		let loggedInControls = `<span id='user-id' name='id' class='username'>
-		<strong>Username:</strong>${user.name}</span>
-		<button id="logout" class="button is-link login-btn">logout</button>`;
+		<strong>Welcome ${user.name}!</strong></span>`;
 		loginDiv.innerHTML = loggedInControls;
 		loginDiv.className = "username-div";
 		userBox.dataset.name = user.name;
