@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://e-bae.herokuapp.com/";
 const ITEMS_URL = `${BASE_URL}items`;
 const overlayDiv = document.getElementById('overlay')
 const specialBoxDiv = document.getElementById('specialBox')
