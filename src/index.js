@@ -212,51 +212,8 @@ function listItems(item){
 	const cancelBtn = document.getElementById('cancel')
 	
 newItemBtn.addEventListener('click', () => {
-	overlayDiv.style.opacity = 0.8;
-	
-	if(overlayDiv.style.display == "block"){
-		overlayDiv.style.display = "none";
-		newItemSpecialBoxDiv.style.display = "none";
-	} else {
-		overlayDiv.style.display = "block";
-		newItemSpecialBoxDiv.style.display = "block";
-	}
-})
+	if (userBox.dataset.id !== undefined) {
 
-const newItemForm = document.getElementById('new-item-form')
-
-newItemForm.addEventListener('submit', () => {
-	event.preventDefault()
-
-	const nameInput = document.getElementById('name-input')
-	const descInput = document.getElementById('desc-input')
-	const imgInput = document.getElementById('img-input')
-	const priceInput = document.getElementById('price-input')
-
-	fetch(ITEMS_URL, {
-		method: "POST",
-		headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-		}, 
-		body: JSON.stringify({ 
-            "name": nameInput.value, 
-			"description": descInput.value,
-			"price": priceInput.value,
-			"img_url": imgInput.value,
-			"user_id": 2,
-			"state": "sell"
-		})
-	}).then(res => res.json())
-	.then((item) => {
-		listItems(item);
-		newItemForm.reset();
-		return Swal.fire({
-			type: 'success',
-			title: 'Your item is up for sale! Happy Selling!',
-			showConfirmButton: true
-		})
-	}).then(() => {
 		overlayDiv.style.opacity = 0.8;
 		
 		if(overlayDiv.style.display == "block"){
@@ -266,7 +223,65 @@ newItemForm.addEventListener('submit', () => {
 			overlayDiv.style.display = "block";
 			newItemSpecialBoxDiv.style.display = "block";
 		}
-	})
+	}
+	else {
+		Swal.fire({
+		  type: 'error',
+		  title: 'You must be logged in to sell items!',
+		  showConfirmButton: true,
+		});
+	}
+})
+
+const newItemForm = document.getElementById('new-item-form')
+
+newItemForm.addEventListener('submit', () => {
+	if (userBox.dataset.id !== undefined) {
+
+		event.preventDefault()
+
+		const nameInput = document.getElementById('name-input')
+		const descInput = document.getElementById('desc-input')
+		const imgInput = document.getElementById('img-input')
+		const priceInput = document.getElementById('price-input')
+
+		fetch(ITEMS_URL, {
+			method: "POST",
+			headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': 'application/json'
+			}, 
+			body: JSON.stringify({ 
+	            "name": nameInput.value, 
+				"description": descInput.value,
+				"price": priceInput.value,
+				"img_url": imgInput.value,
+				"user_id": 2,
+				"state": "sell"
+			})
+		})
+		.then(res => res.json())
+		.then((item) => {
+			listItems(item);
+			newItemForm.reset();
+			return Swal.fire({
+				type: 'success',
+				title: 'Your item is up for sale! Happy Selling!',
+				showConfirmButton: true
+			})
+		}).then(() => {
+			overlayDiv.style.opacity = 0.8;
+			
+			if(overlayDiv.style.display == "block"){
+				overlayDiv.style.display = "none";
+				newItemSpecialBoxDiv.style.display = "none";
+			} else {
+				overlayDiv.style.display = "block";
+				newItemSpecialBoxDiv.style.display = "block";
+			}
+		})
+
+	}
 
 })
 
