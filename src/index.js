@@ -59,8 +59,12 @@ specialBoxDiv.addEventListener("click", (e) => {
 			})
 			.then(res => res.json())
 			.then((json) => {
-				console.log(json);
-				if (json.response === "success")
+
+				if (json.response === "success") {
+
+					const boughtItem = document.querySelector(`.item-card[data-id="${itemId}"]`);
+					console.log(boughtItem);
+					boughtItem.remove();
 					// you have bought the item
 					Swal.fire({
 					  type: 'success',
@@ -79,6 +83,7 @@ specialBoxDiv.addEventListener("click", (e) => {
 							}
 						}
 					)
+				}
 				else
 					// you are not logged in
 					Swal.fire({
