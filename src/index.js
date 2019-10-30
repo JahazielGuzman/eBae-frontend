@@ -10,6 +10,7 @@ const userBox = document.querySelector('#user');
 const loginButton = document.querySelector('#login');
 const loginDiv = document.querySelector('#login-div')
 const loginInput = document.querySelector('#user-id');
+const logoButton = document.querySelector('#logo');
 const boughtButton = document.querySelector('#bought-items-btn');
 const sellingButton = document.querySelector('#selling-items-btn');
 overlayDiv.className = 'overlay'
@@ -57,6 +58,11 @@ loginButton.addEventListener("click", function () {
 			  showConfirmButton: true,
 			})
 	});
+});
+
+logoButton.addEventListener("click", () => {
+
+	initialItems();
 });
 
 boughtButton.addEventListener("click", () => {
