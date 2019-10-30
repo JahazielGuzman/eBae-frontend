@@ -103,6 +103,7 @@ div.new-item {
     overflow: hidden;
 }
 
+
 div#new-item-specialBox-div {
     display: none;
     position: relative;
@@ -118,6 +119,26 @@ form#new-item-form {
     padding: 20px;
 }
 /*---------- End new Item */
+
+div.bought-items {
+    position: absolute;
+    margin: 50px auto;
+    /* width: 95%; */
+    max-width: 300px;
+    top: 0px;
+    left: 75em;
+    overflow: hidden;
+}
+
+div.selling-items {
+    position: absolute;
+    margin: 50px auto;
+    /* width: 95%; */
+    max-width: 300px;
+    top: 0px;
+    left: 85em;
+    overflow: hidden;
+}
 
 /*---------- Index */
 

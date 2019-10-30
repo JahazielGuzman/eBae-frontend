@@ -10,12 +10,28 @@ const userBox = document.querySelector('#user');
 const loginButton = document.querySelector('#login');
 const loginDiv = document.querySelector('#login-div')
 const loginInput = document.querySelector('#user-id');
+const boughtButton = document.querySelector('#bought-items-btn');
+const sellingButton = document.querySelector('#selling-items-btn');
 overlayDiv.className = 'overlay'
 specialBoxDiv.className = 'specialBox'
 
 function initialItems() {
 
 	fetch(ITEMS_URL)
+	.then(res => res.json())
+	.then(itemIndexer);
+}
+
+function boughtItems() {
+
+	fetch(`${BASE_URL}/bought_items/${userBox.dataset.id}`)
+	.then(res => res.json())
+	.then(itemIndexer);
+}
+
+function sellingItems() {
+
+	fetch(`${BASE_URL}/selling_items/${userBox.dataset.id}`)
 	.then(res => res.json())
 	.then(itemIndexer);
 }
@@ -42,6 +58,34 @@ loginButton.addEventListener("click", function () {
 			})
 	});
 });
+
+boughtButton.addEventListener("click", () => {
+
+	if (userBox.dataset.id !== undefined) {
+		boughtItems();
+	}
+	else
+		Swal.fire({
+			  type: 'error',
+			  title: 'You must be logged in to view bought items!',
+			  showConfirmButton: true,
+			})
+
+});
+sellingButton.addEventListener("click", () => {
+
+	if (userBox.dataset.id !== undefined) {
+		sellingItems();
+	}
+	else
+		Swal.fire({
+			  type: 'error',
+			  title: 'You must be logged in to view selling items!',
+			  showConfirmButton: true,
+			})
+
+});
+
 
 specialBoxDiv.addEventListener("click", (e) => {
 
@@ -138,6 +182,7 @@ function searchItems(event) {
 }
 
 function itemIndexer(items){
+	wrapper.innerHTML = "";
 	items.forEach(listItems)
 }
 
