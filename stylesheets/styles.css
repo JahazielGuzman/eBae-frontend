@@ -1,4 +1,12 @@
 /*---------- Search Bar */
+
+.logo {
+    font-family: 'Raleway', sans-serif;
+    color: #e22020;
+    font-weight: bold;
+    font-size: 3em;
+}
+
 div.search-bar {
     position: relative;
     margin: 50px auto;
@@ -93,13 +101,21 @@ input#user-id {
 
 /*---------- New Item/Sell your bullshit */
 
-div.new-item {
+div.logo-div {
     position: absolute;
-    margin: 50px auto;
-    /* width: 95%; */
+    margin: 40px auto;
     max-width: 300px;
     top: 0px;
     left: 100px;
+    overflow: hidden;
+}
+
+div.new-item {
+    position: absolute;
+    margin: 50px auto;
+    max-width: 300px;
+    top: 0px;
+    left: 16em;
     overflow: hidden;
 }
 
