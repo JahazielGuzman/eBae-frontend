@@ -2,8 +2,8 @@ const BASE_URL = "https://e-bae.herokuapp.com";
 const ITEMS_URL = `${BASE_URL}/items`;
 const overlayDiv = document.getElementById('overlay')
 const specialBoxDiv = document.getElementById('specialBox')
+const root = document.getElementById('root');
 const body = document.getElementById('body')
-const wrapper = document.getElementById('wrapper')
 const search_button = document.querySelector("#search_button");
 const search_input = document.querySelector("#myinput");
 const userBox = document.querySelector('#user');
@@ -13,8 +13,35 @@ const loginInput = document.querySelector('#user-id');
 const logoButton = document.querySelector('#logo');
 const boughtButton = document.querySelector('#bought-items-btn');
 const sellingButton = document.querySelector('#selling-items-btn');
+const wrapper = document.getElementById('wrapper')
 overlayDiv.className = 'overlay'
 specialBoxDiv.className = 'specialBox'
+
+function showSpecialDiv(e) {
+
+	const itemCard = e.target.closest('.item-card');
+	if (itemCard) {
+		
+		overlayDiv.style.opacity = .8;
+
+		if(overlayDiv.style.display == "block"){
+			overlayDiv.style.display = "none";
+			specialBoxDiv.style.display = "none";
+		} else {
+			overlayDiv.style.display = "block";
+			specialBoxDiv.style.display = "block";
+		}
+
+		specialBoxDiv.innerHTML = `
+				<img src="${itemCard.dataset.img_url}" style="width:300px;height:300;">
+				<h1 class='subtitle'><strong>${itemCard.dataset.name}</strong></h1>
+				<p>${itemCard.dataset.description}</p>
+				<h2>Price: <strong><span class='dolla'>$</span>${itemCard.dataset.price}</strong></h2>
+				<button class='button' style="background-color: orange;" id="buy-button" data-id="${itemCard.dataset.id}" >Buy</button>`
+	}
+}
+
+wrapper.addEventListener("click", showSpecialDiv);
 
 function initialItems() {
 
@@ -97,7 +124,6 @@ specialBoxDiv.addEventListener("click", (e) => {
 
 	if (e.target.id === "buy-button") {
 		if (userBox.dataset.id !== undefined) {
-			console.log("you can boy now!");
 			const itemId = e.target.dataset.id;
 			fetch(`${BASE_URL}/items/${itemId}`, {
 				method: "PATCH",
@@ -113,7 +139,6 @@ specialBoxDiv.addEventListener("click", (e) => {
 				if (json.response === "success") {
 
 					const boughtItem = document.querySelector(`.item-card[data-id="${itemId}"]`);
-					console.log(boughtItem);
 					boughtItem.remove();
 					// you have bought the item
 					Swal.fire({
@@ -176,46 +201,26 @@ specialBoxDiv.addEventListener("click", (e) => {
 	}
 });
 
+
+
 // Go to the index route with search parameter corresponding to the item you searched for
 // then display each item that is returned from the search
 function searchItems(event) {
 
-	wrapper.innerHTML = "";
 	event.preventDefault();
 	fetch(`${ITEMS_URL}?search=${search_input.value}`)
-		.then(res => res.json())
-		.then(itemIndexer)
+	.then(res => res.json())
+	.then(itemIndexer)
 }
 
 function itemIndexer(items){
-	wrapper.innerHTML = "";
+	const itemCard = Array.from(document.getElementsByClassName("item-card"))
 	items.forEach(listItems)
+	itemCard.forEach(function (c) {c.remove()})
 }
 
 
-wrapper.addEventListener("click", (e) => {
 
-	const itemCard = e.target.closest('.item-card');
-	if (itemCard) {
-		
-		overlayDiv.style.opacity = .8;
-
-		if(overlayDiv.style.display == "block"){
-			overlayDiv.style.display = "none";
-			specialBoxDiv.style.display = "none";
-		} else {
-			overlayDiv.style.display = "block";
-			specialBoxDiv.style.display = "block";
-		}
-
-		specialBoxDiv.innerHTML = `
-				<img src="${itemCard.dataset.img_url}" style="width:300px;height:300;">
-				<h1 class='subtitle'><strong>${itemCard.dataset.name}</strong></h1>
-				<p>${itemCard.dataset.description}</p>
-				<h2>Price: <strong><span class='dolla'>$</span>${itemCard.dataset.price}</strong></h2>
-				<button class='button' style="background-color: orange;" id="buy-button" data-id="${itemCard.dataset.id}" >Buy</button>`
-	}
-})
 
 overlayDiv.addEventListener("click", () => {
 	overlayDiv.style.opacity = 0;
@@ -242,6 +247,7 @@ function listItems(item){
 		indexDiv.dataset.img_url = item.img_url
 		indexDiv.dataset.id = item.id
 		indexDiv.dataset.user_id = item.user_id
+		indexDiv.dataset.user_name = item.user_name
 
 	const cardImgDiv = document.createElement('div')
 		cardImgDiv.className = 'card-image'
@@ -252,21 +258,22 @@ function listItems(item){
 		contentDiv.className = 'card-content'
 		contentDiv.innerHTML = `
 			<h1 class='subtitle'><strong>${item.name}</strong></h1>
+			${item.user_name ? `<p><strong>Seller:</strong> ${item.user_name}</p>` : ""}
+			<br />
 			<p>${item.description}</p>`
 
-		wrapper.appendChild(indexDiv)
 		indexDiv.appendChild(cardImgDiv)
 		indexDiv.appendChild(contentDiv)
 		cardImgDiv.appendChild(cardFigure)
-
-	}
+		wrapper.appendChild(indexDiv)
+}
 	
 	//--------------------New Item--------------->
 	
-	const newItemBtn = document.getElementById('new-item-btn')
-	const newItemSpecialBoxDiv = document.getElementById('new-item-specialBox-div')
-	const cancelBtn = document.getElementById('cancel')
-	
+const newItemBtn = document.getElementById('new-item-btn')
+const newItemSpecialBoxDiv = document.getElementById('new-item-specialBox-div')
+const cancelBtn = document.getElementById('cancel')
+
 newItemBtn.addEventListener('click', () => {
 	if (userBox.dataset.id !== undefined) {
 
@@ -340,15 +347,3 @@ newItemForm.addEventListener('submit', () => {
 	}
 
 })
-
-// cancelBtn.addEventListener('click', () => {
-// 	console.log(cancelBtn)
-// 	if(overlayDiv.style.display == "block"){
-// 		console.log("Yo");
-// 		overlayDiv.style.display = "none";
-// 		newItemSpecialBoxDiv.style.display = "none";
-// 	} else {
-// 		overlayDiv.style.display = "block";
-// 		newItemSpecialBoxDiv.style.display = "block";
-// 	}
-// })
