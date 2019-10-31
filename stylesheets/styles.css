@@ -161,7 +161,7 @@ div.selling-items {
 div#wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: start;
     position: absolute;
 	top: 120px;
 	left: 0px;

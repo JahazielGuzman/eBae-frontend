@@ -214,9 +214,9 @@ function searchItems(event) {
 }
 
 function itemIndexer(items){
-	const itemCard = Array.from(document.getElementsByClassName("item-card"))
-	items.forEach(listItems)
-	itemCard.forEach(function (c) {c.remove()})
+
+	wrapper.innerHTML = "";
+	items.forEach(listItems);
 }
 
 
@@ -236,7 +236,7 @@ overlayDiv.addEventListener("click", () => {
 	}
 })
 
-function listItems(item){
+function listItems(item, index){
 
 	const indexDiv = document.createElement('div')
 		indexDiv.className = "card item-card"
@@ -249,12 +249,15 @@ function listItems(item){
 		indexDiv.dataset.user_id = item.user_id
 		indexDiv.dataset.user_name = item.user_name
 
-	const cardImgDiv = document.createElement('div')
+		if ((index + 1) % 6 !== 0) {
+			indexDiv.style.marginRight = "1rem";
+		}
+		const cardImgDiv = document.createElement('div')
 		cardImgDiv.className = 'card-image'
-	const cardFigure = document.createElement('figure')
+		const cardFigure = document.createElement('figure')
 		cardFigure.className = 'image is-4by3'
 		cardFigure.innerHTML = `<img src="${item.img_url}">`
-	const contentDiv = document.createElement('div')
+		const contentDiv = document.createElement('div')
 		contentDiv.className = 'card-content'
 		contentDiv.innerHTML = `
 			<h1 class='subtitle'><strong>${item.name}</strong></h1>
