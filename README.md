@@ -1,5 +1,7 @@
 # eBae
 
+[![eBae](http://img.youtube.com/vi/qegE-kYGddY/0.jpg)](https://www.youtube.com/embed/qegE-kYGddY"eBae")
+
 A peer-to-peer marketplace where users can buy and sell items. You can also search for items. This project was made for Module 3 of Flatiron School's Software Engineering Intensive program. Module 3 was focused on learning Vanilla Javascript.
 
 This repository is for the React frontend, visit [here](https://github.com/JahazielGuzman/ebae) for the backend code base
