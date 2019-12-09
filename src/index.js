@@ -20,7 +20,7 @@ specialBoxDiv.className = 'specialBox'
 function showSpecialDiv(e) {
 
 	const itemCard = e.target.closest('.item-card');
-	if (itemCard) {
+	if (itemCard && e.target.dataset.buy === "1") {
 		
 		overlayDiv.style.opacity = .8;
 
@@ -37,7 +37,7 @@ function showSpecialDiv(e) {
 				<h1 class='subtitle'><strong>${itemCard.dataset.name}</strong></h1>
 				<p>${itemCard.dataset.description}</p>
 				<h2>Price: <strong><span class='dolla'>$</span>${itemCard.dataset.price}</strong></h2>
-				<button class='button' style="background-color: orange;" id="buy-button" data-id="${itemCard.dataset.id}" >Buy</button>`
+				<button class='button' style="background-color: orange;" id="buy-button" data-id="${itemCard.dataset.id}" data-can-buy="1">Buy</button>`
 	}
 }
 
@@ -50,13 +50,18 @@ function initialItems() {
 	fetch(fetchURL)
 	.then(res => res.json())
 	.then(itemIndexer);
+
+	userBox.dataset.buy = 1;
 }
 
 function boughtItems() {
 
+
 	fetch(`${BASE_URL}/bought_items/${userBox.dataset.id}`)
 	.then(res => res.json())
 	.then(itemIndexer);
+
+	userBox.dataset.buy = 0;
 }
 
 function sellingItems() {
@@ -64,6 +69,8 @@ function sellingItems() {
 	fetch(`${BASE_URL}/selling_items/${userBox.dataset.id}`)
 	.then(res => res.json())
 	.then(itemIndexer);
+
+	userBox.dataset.buy = 0;
 }
 
 initialItems();
