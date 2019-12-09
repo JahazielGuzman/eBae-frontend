@@ -45,7 +45,9 @@ wrapper.addEventListener("click", showSpecialDiv);
 
 function initialItems() {
 
-	fetch(ITEMS_URL)
+	let fetchURL = ITEMS_URL + (userBox.dataset.id ? `?user_id=${userBox.dataset.id}` : "")
+
+	fetch(fetchURL)
 	.then(res => res.json())
 	.then(itemIndexer);
 }
@@ -79,6 +81,7 @@ loginButton.addEventListener("click", function () {
 		loginDiv.className = "username-div";
 		userBox.dataset.name = user.name;
 		userBox.dataset.id = user.id;
+		initialItems();
 	 	Swal.fire({
 			  type: 'success',
 			  title: `Welcome back ${user.name}! Enjoy your shopping experience!`,
@@ -207,8 +210,11 @@ specialBoxDiv.addEventListener("click", (e) => {
 // then display each item that is returned from the search
 function searchItems(event) {
 
+	let fetchURL = `${ITEMS_URL}?search=${search_input.value}` + 
+		(userBox.dataset.id ? `&user_id=${userBox.dataset.id}` : "")
+
 	event.preventDefault();
-	fetch(`${ITEMS_URL}?search=${search_input.value}`)
+	fetch(fetchURL)
 	.then(res => res.json())
 	.then(itemIndexer)
 }
