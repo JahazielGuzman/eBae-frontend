@@ -20,7 +20,7 @@ specialBoxDiv.className = 'specialBox'
 function showSpecialDiv(e) {
 
 	const itemCard = e.target.closest('.item-card');
-	if (itemCard && e.target.dataset.buy === "1") {
+	if (itemCard && userBox.dataset.buy === "1") {
 		
 		overlayDiv.style.opacity = .8;
 
